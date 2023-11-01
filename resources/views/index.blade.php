@@ -43,33 +43,6 @@
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript">
     
-        $(".form-remove").click(function(e){
-            e.preventDefault();
-            
-            var data = $('#form-data').serialize();
-            $.ajax({
-                type: 'post',
-                url: "{{ route('needle.remove', $haystack->id) }}",
-                data: data,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                beforeSend: function(){
-                    $('#create_new').html('....Please wait');
-                },
-                success: function(response){
-                    alert(response.success);
-                },
-                complete: function(response){
-                    $('#create_new').html('Create New');
-                }
-            });
-             location.reload();
-        });
-
-    </script>
-    <script type="text/javascript">
-    
         $(".submit-form").click(function(e){
             e.preventDefault();
             var data = $('#form-data').serialize();
