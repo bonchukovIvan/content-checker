@@ -5,7 +5,6 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <p style="font-size:20px; font-weight:bold;">Title</p>
-           
             <form class="mt-3" id="form-data">
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -18,7 +17,6 @@
                 <div id="values" class="form-group">
                     <label for="inputField">Value:</label>
                     <input type="text" class="inputField" name="values[]"> 
-                    <button type="button" onclick="removeInput(this)">-</button>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 </div>
                     <button type="button" onclick="addInput()">+</button>
