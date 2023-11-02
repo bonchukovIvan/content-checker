@@ -18,7 +18,8 @@ use App\Http\Controllers\LogicController;
 Route::controller(HaystackController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/view', 'get_all')->name('all');
-    Route::get('/view/{id}', 'get_one')->name('view');
+    Route::get('/view/{id}', 'view_one')->name('view');
+    Route::get('/get/{id}', 'get_one')->name('haystack.get_one');
 
     Route::post('/', 'store')->name('store');
     Route::post('/update/{id}', 'update')->name('update');
@@ -26,7 +27,7 @@ Route::controller(HaystackController::class)->group(function () {
 });
 
 Route::controller(NeedleController::class)->group(function () {
-    Route::post('needle/remove/{id}', 'remove')->name('needle.remove');
+    Route::post('needle/remove', 'remove')->name('needle.remove');
 });
 
 Route::controller(LogicController::class)->group(function () {

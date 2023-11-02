@@ -2,9 +2,8 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-body">
-            <p style="font-size:20px; font-weight:bold;">Title</p>
-                
-            <div>
+            <p style="font-size:20px; font-weight:bold;">Title</p>         
+            <div> 
                 <form class="mt-3" id="form-remove">
                     <button type="button" class="btn btn-success form-remove" style="background:red" id="create_new">Delete select haystacks</button>
                 

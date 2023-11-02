@@ -18,7 +18,7 @@ class LogicController extends Controller
             foreach ($haystack->needles as $key => $needles) 
             {
                 $chunk['name'] = $haystack->name; 
-                $chunk['link'] = $haystack->link; 
+                $chunk['link'] = $haystack->link;
                 $chunk['needles'][$needles->value] = str_contains($content, $needles->value); 
                 
             }

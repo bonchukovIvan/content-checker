@@ -7,15 +7,18 @@ use App\Models\Needle;
 
 class NeedleController extends Controller
 {
-    public function remove(Request $request, $haystack_id) {
+    public function remove(Request $request) {
         if (!$request->remove_needles) {
-            return redirect()->route('view', $haystack_id)->with('success', 'Needle not selected.');
+            return response(['succcess' => false]);
         }
 
         foreach($request->remove_needles as $key => $id) {
-            $haystack = Needle::findOrFail($id);
-            $haystack->delete();
+            $needle = Needle::findOrFail($id);
+            $needle->delete();
         }
-        return redirect()->route('view', $haystack_id)->with('success', 'Needle deleted successfully.');
+        return response($needle);
     }
 }
+// const values = document.getElementById('values');
+//                     values.innerHTML = '';
+//                     get_one();

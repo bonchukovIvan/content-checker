@@ -17,6 +17,12 @@
     <body>
         @section('sidebar')
             This is the master sidebar.
+            <a href='/logic/check'>
+                <button type="button" class="btn" style="background:blue" id="create_new">Check</button>
+            </a>
+            <a href='/'>
+                <button type="button" class="btn" style="background:orange" id="create_new">Home</button>
+            </a>
         @show
  
         <div class="container">
