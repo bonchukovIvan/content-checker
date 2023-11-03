@@ -44,8 +44,6 @@
             const res_arr = [];
             result.forEach((element) =>
             {
-                
-
                 const link = document.createElement('div');
                 link.classList.add("result__link");
                 link.innerText = element.link;

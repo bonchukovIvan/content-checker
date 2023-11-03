@@ -148,8 +148,8 @@ button:hover {
   margin-right: 10px;
   background-color: #eee;
 }
-.haystack__link {
-
+label {
+    font-weight: 600;
 }
 .needles {
     margin-top: 10px;

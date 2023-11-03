@@ -13,7 +13,7 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/reset.css') }}" rel="stylesheet">
-        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        
     </head>
     <body>
         @section('sidebar')
@@ -22,12 +22,12 @@
                 <div class="header-body">
                 <div class="nav-item">
                     <a href='/logic/check'>
-                        <button type="button" class="nav-btn" id="create_new">Check</button>
+                        <button type="button" class="nav-btn" >Check</button>
                     </a>
                 </div>
                 <div class="nav-item"> 
                     <a href='/'>
-                         <button type="button" class="nav-btn" id="create_new">Home</button>
+                         <button type="button" class="nav-btn" >Home</button>
                     </a>
                 </div>
                 </div>
@@ -42,4 +42,6 @@
             
         </div>
     </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src={{ asset('js/web.js') }}></script>
 </html>
