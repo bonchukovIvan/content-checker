@@ -1,44 +1,40 @@
 @extends('layouts.app')
 @section('content')
-    <div class="panel panel-default">
+
         <div class="panel-body">
-            <p style="font-size:20px; font-weight:bold;">Title</p>
-            <a href='/'>
-                <button type="button" class="btn" style="background:blue" id="back">Back</button>
-            </a>
             <div>
                 <form class="mt-3" id="form-remove">
-                <button type="button" class="btn btn-success form-remove" style="background:red" id="delete">Delete select</button>
+                <button type="button" class="btn btn-success form-remove"  id="delete">Delete select</button>
                 </form>
                  <form class="mt-3" id="form-data">
                         <div class="haystack">
                             <div class="haystack-container">
-                                <label for="name">Name:</label>
-                                <input id="name" type="text" name="name" value="">
-                                <label for="link">Link:</label>
-                                <input id="link" type="text" name="link" value="">
-                                    <label for="values">Needles:</label>
-                                    <div id="values" class="values">
-                                        {{-- @if ($haystack->needles)
-                                            @foreach ($haystack->needles as $needle)
-                                                <p>Value:</p> 
-                                                <input type="text" name="needles[{{ $needle->id }}][value]" value="{{ $needle->value  }}">
-                                                <input type="checkbox" name="remove_needles[]" value="{{ $needle->id }}">
-                                            @endforeach
-                                        @endif --}}
-                                    </div>
-                                    <button type="button" onclick="addInput()">+</button>
+                            <div class="haystack__title">
+                            <label for="name">Name:</label>
+                            <input id="name" type="text" name="name" value="">
+                            <label for="link">Link:</label>
+                            <input id="link" type="text" name="link" value="">
+                        </div>
+                            <div class="needle-update">
+                                <button type="button" onclick="addInput()">+</button>
+                                <label for="values">Needles:</label>
+                            </div>
+                                
+                                <div id="values" class="values">
+                                </div>
+                                    
                             </div>
                         </div>
-                        <button type="button" class="btn btn-success submit-form" style="background:green" id="create_new">Update</button>
+                        <button type="button" class="btn btn-success submit-form"  id="create_new">Update</button>
                 </form>
             </div>
         </div>
-    </div>
+
     <script>
         function addInput() {
             var inputFields = document.getElementById('values');
             var newDiv = document.createElement('div');
+            newDiv.classList.add('values-update');
             newDiv.innerHTML = '<label for="inputField">Value:</label><input type="text" class="inputField" name="needles_new[]"> <button type="button" onclick="removeInput(this)">-</button>';
             inputFields.appendChild(newDiv);
         }

@@ -11,22 +11,35 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/reset.css') }}" rel="stylesheet">
         <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     </head>
     <body>
         @section('sidebar')
-            This is the master sidebar.
-            <a href='/logic/check'>
-                <button type="button" class="btn" style="background:blue" id="create_new">Check</button>
-            </a>
-            <a href='/'>
-                <button type="button" class="btn" style="background:orange" id="create_new">Home</button>
-            </a>
+        <header class="header">
+            <div class="header-container">
+                <div class="header-body">
+                <div class="nav-item">
+                    <a href='/logic/check'>
+                        <button type="button" class="nav-btn" id="create_new">Check</button>
+                    </a>
+                </div>
+                <div class="nav-item"> 
+                    <a href='/'>
+                         <button type="button" class="nav-btn" id="create_new">Home</button>
+                    </a>
+                </div>
+                </div>
+            </div>
+        </header>
         @show
  
         <div class="container">
-            @yield('content')
+            <div class="panel-body">
+                @yield('content')
+            </div>
+            
         </div>
     </body>
 </html>

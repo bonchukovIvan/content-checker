@@ -1,43 +1,47 @@
 @extends('layouts.app')
 
-
 @section('content')
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <p style="font-size:20px; font-weight:bold;">Title</p>
-            <form class="mt-3" id="form-data">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="email">Link</label>
-                    <input type="text" name="link" id="link" class="form-control">
-                </div>
-                <div id="values" class="form-group">
-                    <label for="inputField">Value:</label>
-                    <input type="text" class="inputField" name="values[]"> 
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                </div>
-                    <button type="button" onclick="addInput()">+</button>
-                <button type="button" class="btn btn-success submit-form" style="background:green" id="create_new">Create haystack</button>
-            </form>
-            <form class="mt-3" id="form-remove">
-            <div class="haystacks">
-             <button type="button" class="btn btn-success form-remove" style="background:red" id="create_new">Delete select needles</button>
-                <div id="haystacks" class="haystacks-container">
-
-                </div>
+    <div class="create-form">
+        <form class="mt-3" id="form-data">
+            <div class="btn-container">
+                <button type="button" class="btn btn-success submit-form"  id="create_new">Create haystack</button>
             </div>
-            </form>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="email">Link</label>
+                <input type="text" name="link" id="link" class="form-control">
+            </div>
+            <div id="values" class="form-group">
+                <label for="inputField">Value:</label>
+                <input type="text" class="inputField" name="values[]"> 
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                
+                <button type="button" onclick="addInput()">+</button>
+            </div>
+        </form>
+    </div>
+    <div class="haystacks-list">
+        <form class="mt-3" id="form-remove">
+        <div class="haystacks">
+            <div class="btn-container">
+                <button type="button" class="btn btn-success form-remove"  id="create_new">Delete select needles</button>
+            </div>
+            <div id="haystacks" class="haystacks-container">
+
             </div>
         </div>
+        </form>
     </div>
+
 
     <script>
         function addInput() {
             var inputFields = document.getElementById('values');
             var newDiv = document.createElement('div');
+            newDiv.classList.add('form-group');
             newDiv.innerHTML = '<label for="inputField">Value:</label><input type="text" class="inputField" name="values[]"> <button type="button" onclick="removeInput(this)">-</button>';
             inputFields.appendChild(newDiv);
         }
@@ -69,9 +73,13 @@
                             checkbox.name = 'remove_haystacks[]';
                             checkbox.value = elem.id;
                             
-                            const name = create('haystack__name', elem.name, 'Name: ');
-                            const link = create('haystack__link', elem.link, 'Link: ');
-                            const a = create('haystack__title', '', '', 'a');
+                            const name = create('haystack__name', elem.name);
+                            const link = create('haystack__link', elem.link);
+                            const a = create('haystack__href', '', '', 'a');
+                            const div = create('haystack__title');
+                            div.appendChild(checkbox);
+                            div.appendChild(a);
+
                             a.href = '/view/'+ elem.id;
                             a.appendChild(name);
                             const haystack = create('haystack');
@@ -95,8 +103,7 @@
                                 });
                             }
                             
-                            haystack.appendChild(checkbox);
-                            haystack.appendChild(a);
+                            haystack.appendChild(div);
                             haystack.appendChild(link);
                             haystack.appendChild(needles);
 

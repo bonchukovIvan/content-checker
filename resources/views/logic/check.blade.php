@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <p style="font-size:20px; font-weight:bold;">Title</p>
-            <form class="mt-3" id="form-data">
-                <button type="button" class="btn btn-success submit-form" style="background:green" id="create_new">Check</button>
-                <div id="result" class="test">
-                </div>
-            </form>
-        </div>
+
+<div class="check">
+    <form class="mt-3" id="form-data">
+            <button type="button" class="btn btn-success submit-form" id="create_new">Check</button>
+        </form>
+        <div id="result" class="results-container">
     </div>
+</div>
+    
+
 
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript">
@@ -29,8 +29,9 @@
                     $('#create_new').html('....Please wait');
                 },
                 success: function(response){
+                    const results = document.getElementById('result');
+                    results.innerHTML = '';
                     createResult(response.result);
-                    console.log(response.result[0])
                 },
                 complete: function(response){
                     $('#create_new').html('Create New');
@@ -43,14 +44,16 @@
             const res_arr = [];
             result.forEach((element) =>
             {
-                console.log(element);
-                const name = document.createElement('div');
-                name.classList.add("result__name");
-                name.innerText = element.name;
+                
 
                 const link = document.createElement('div');
                 link.classList.add("result__link");
                 link.innerText = element.link;
+
+                const name = document.createElement('div');
+                name.classList.add("haystack__title");
+                name.innerText = element.name;
+                name.appendChild(link);
 
                 const needles = document.createElement('div');
                 needles.classList.add("result__needles");
@@ -84,10 +87,12 @@
                             needle.classList.add("result__needles-true");
 
                             const needle_text = document.createElement('div');
+                            needle_text.classList.add("resneed");
                             needle_text.classList.add("result__needles-text");
                             needle_text.innerText = prop;
 
                             const needle_value = document.createElement('div');
+                            needle_value.classList.add("resneed");
                             needle_value.classList.add("result__needles-value");
                             needle_value.innerText = element.needles[prop];
 
@@ -103,10 +108,10 @@
                 }
                 
                 const result = document.createElement('div');
-                result.classList.add("result");
+                result.classList.add("haystack");
 
                 result.appendChild(name);
-                result.appendChild(link);
+     
                 result.appendChild(needles);
 
                 res_arr.push(result);
@@ -118,8 +123,8 @@
                 results.appendChild(result);
             });
 
-            const panelBody = document.querySelector('.panel-body');
-                panelBody.appendChild(results);
+            const panelBody = document.getElementById('result');
+            panelBody.appendChild(results);
         }
     </script>
 @endsection
