@@ -12,6 +12,7 @@ class LogicController extends Controller
     {
         $haystacks = Haystack::with('needles')->get();
         $result = [];
+        $test = [];
         foreach($haystacks as $haystack) 
         {
             $content = file_get_contents($haystack->link);
@@ -19,14 +20,14 @@ class LogicController extends Controller
             {
                 $chunk['name'] = $haystack->name; 
                 $chunk['link'] = $haystack->link;
-                $chunk['needles'][$needles->value] = str_contains($content, $needles->value); 
-                
+                $chunk['needles'][$needles->value] = str_contains(mb_strtolower($content), trim(mb_strtolower($needles->value))); 
+                $test[] = mb_strtolower($needles->value);
             }
             array_push($result, $chunk);
             $chunk = [];
         }
         
-        return response(['result' => (array)$result]);
+        return response(['result' => (array)$result, 'test' => $test]);
     }
 
     public function result() {

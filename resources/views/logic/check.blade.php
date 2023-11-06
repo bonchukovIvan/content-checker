@@ -29,6 +29,7 @@
                     $('#create_new').html('....Please wait');
                 },
                 success: function(response){
+                    console.log(response);
                     const results = document.getElementById('result');
                     results.innerHTML = '';
                     createResult(response.result);
@@ -58,7 +59,7 @@
                 if(element.needles) 
                 {    
                     const needle_arr = [];
-                    console.log(element.needles);
+                    
                     for(prop in element.needles)
                     {
                         
