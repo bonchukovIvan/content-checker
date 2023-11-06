@@ -57,3 +57,24 @@ function create_haystacks(response)
         haystacks.appendChild(haystack);
     });
 }
+
+function display_sites(response) {
+    response.forEach(elem => 
+    {
+        const checkbox = create('sites__check', '', '', 'input');
+        checkbox.type = 'checkbox';
+        checkbox.name = 'removes[]';
+        checkbox.value = elem.id;
+
+        const link = create('sites__link', elem.link);
+        const faculty_name = create('sites__faculty', elem.faculty.name);
+        
+        const site = create('site');
+        site.appendChild(checkbox);
+        site.appendChild(link);
+        site.appendChild(faculty_name);
+
+        const sites = document.getElementById('sites');
+        sites.appendChild(site);
+    });
+}

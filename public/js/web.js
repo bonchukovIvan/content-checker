@@ -11,34 +11,32 @@ function get(route, callback)
     });
 }
 
-function post(route, data_source, before, callback) {
-    $(data_source).click(function(e)
+
+function request(source, route, type, callback) 
+{
+    $("."+source).click(function(e)
     {
         e.preventDefault();
-
-        const data = $(data_source).serialize();
-        
+            
+        var data = $('#'+source).serialize();
         $.ajax(
         {
-            type: 'post',
+            type: type,
             url: route,
             data: data,
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            success: function(response) 
-            {
-                if(before) {
-                    const el = document.getElementById(before);
-                    el.innerHTML = '';
-                }
-
+            beforeSend: function(){
+                $('#delete').html('....Please wait');
+            },
+            success: function(response){
                 callback(response);
             },
+            complete: function(response){
+                $('#delete').html('Add site');
+            }
         });
     });
 }
 
-function test() {
-    console.log(1);
-}
