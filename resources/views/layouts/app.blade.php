@@ -26,8 +26,18 @@
                     </a>
                 </div>
                 <div class="nav-item"> 
-                    <a href='/'>
-                         <button type="button" class="nav-btn" >Home</button>
+                    <a href='/sites'>
+                         <button type="button" class="nav-btn" >Sites</button>
+                    </a>
+                </div>
+                <div class="nav-item"> 
+                    <a href='/links'>
+                         <button type="button" class="nav-btn" >Links</button>
+                    </a>
+                </div>
+                <div class="nav-item"> 
+                    <a href='/value'>
+                         <button type="button" class="nav-btn" >Value</button>
                     </a>
                 </div>
                 </div>

@@ -26,13 +26,13 @@ header {
     width: 100%;
 }
 .nav-btn {
-    border: 1px solid #43d9ff;
-    border-radius: 10px;
-    background: #eafbff;
+    border: 1px solid #9abac2;
+    border-radius: 5px;
+    background: #f2fdff;
     color:#002831;
 }
 .nav-btn:hover {
-    color: #fff;
+    /* color: #fff; */
     background-color: #aee4f0;
 }
 
@@ -93,9 +93,9 @@ button {
     border-radius: 10px;
     background: #eafbff;
     color:#002831;
-    padding: 5px 20px;
+    padding: 5px 10px;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 500;
     transition: 0.2s all linear;
 }
 .form-remove {
@@ -105,7 +105,7 @@ button {
 }
 .form-remove:hover {
     background-color:#F9322C;
-    color: #fff;
+    /* color: #fff; */
 }
 button:hover {
     cursor: pointer;

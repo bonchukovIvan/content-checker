@@ -7,7 +7,7 @@
                     <button type="button" class="btn btn-success add-data"  id="create_new">Add site</button>
                 </div>
                 <div class="form-group">
-                    <label for="email">Link</label>
+                    <label for="link">Link</label>
                     <input type="text" name="link" id="link" class="form-control">
                 </div>
                 <div class="form-group">
@@ -42,7 +42,6 @@
         {
             const option = create('option', elem.name, '', 'option');
             option.value = elem.id;
-            
             const options = document.getElementById('options');
             options.appendChild(option);
 
@@ -53,6 +52,7 @@
     {
         const sites = document.getElementById('sites');
         sites.innerHTML = '';
+        document.getElementById("add-data").reset();
         get("{{ route('sites') }}", (response) => 
         {
             display_sites(response);
@@ -61,7 +61,6 @@
 
     request('remove-data', "{{ route('sites.delete_multiple') }}", 'delete', (response) => 
     {
-
         const sites = document.getElementById('sites');
         sites.innerHTML = '';
         get("{{ route('sites') }}", (response) => 

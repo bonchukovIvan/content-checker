@@ -33,7 +33,7 @@ class SitesController extends Controller
             'sites_link' => $request->sites_link,
             'faculty_id' => $request->faculty_id,
         ]);
-        return response($site->load('faculty'));
+        return response($site);
     }
 
     public function delete($id) 

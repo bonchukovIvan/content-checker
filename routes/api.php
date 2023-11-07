@@ -23,19 +23,20 @@ Route::group(array('prefix' => '/v1'), function()
         Sites controller
      */
     Route::get('sites', [SitesController::class, 'get_all'])->name('sites');
-    Route::get('sites/{id}', [SitesController::class, 'get_one']);
+    Route::get('sites/{id}', [SitesController::class, 'get_one'])->name('sites.get_one');
 
     Route::post('sites', [SitesController::class, 'store'])->name('sites.store');
+    Route::patch('sites/{id}', [SitesController::class, 'update'])->name('sites.update');
     Route::delete('sites', [SitesController::class, 'delete_multiple'])->name('sites.delete_multiple');
     /*
         Links controller
      */
-    Route::get('links', [LinksController::class, 'get_all']);
+    Route::get('links', [LinksController::class, 'get_all'])->name('links');
     Route::get('links/{id}', [LinksController::class, 'get_one']);
 
-    Route::post('links', [LinksController::class, 'store']);
-    Route::patch('links/{id}', [LinksController::class, 'update']);
-    Route::delete('links/{id}', [LinksController::class, 'delete']);
+    Route::post('links', [LinksController::class, 'store'])->name('links.store');
+    Route::patch('links/{id}', [LinksController::class, 'update'])->name('links.update  ');
+    Route::delete('links', [LinksController::class, 'delete_multiple'])->name('links.delete_multiple');
     /*
         Faculty controller
      */

@@ -42,7 +42,7 @@ class LinksController extends Controller
         return response(Link::findOrFail($id)->delete());
     }
 
-    public function deleteMultiple(Request $request) 
+    public function delete_multiple(Request $request) 
     {     
         foreach ($request->removes as $key => $id) 
         {

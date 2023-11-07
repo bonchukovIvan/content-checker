@@ -6,7 +6,7 @@ function get(route, callback)
         url: route,
         success: function(response)
         {
-            callback(response);
+            callback(response, id = '');
         },
     });
 }

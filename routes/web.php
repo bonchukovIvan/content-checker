@@ -1,11 +1,8 @@
 <?php
 
-use App\Http\Controllers\Client\MainController;
+use App\Http\Controllers\Client\LinkController;
+use App\Http\Controllers\Client\SiteController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HaystackController;
-use App\Http\Controllers\NeedleController;
-use App\Http\Controllers\LogicController;
-use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +37,11 @@ use App\Http\Controllers\Controller;
 
 // v2 -----------------------------------------------------------------
 
-Route::controller(MainController::class)->group(function () {
-    Route::get('/', 'index');
+Route::controller(SiteController::class)->group(function () {
+    Route::get('/sites', 'index');
+    Route::get('/sites/{id}', 'get_one');
+});
+Route::controller(LinkController::class)->group(function () {
+    Route::get('links', 'index');
+    Route::get('/links/{id}', 'get_one');
 });

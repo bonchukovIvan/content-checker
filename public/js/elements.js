@@ -10,6 +10,12 @@ function create(class_name, inner_text = '', add_text = '', type = 'div')
     return element;
 }
 
+function changeSelected(needle, value) 
+{
+    const $select = document.querySelector('#'+needle);
+    $select.value = value;
+};
+
 function create_haystacks(response) 
 {
     response.forEach((elem) => 
@@ -65,14 +71,18 @@ function display_sites(response) {
         checkbox.type = 'checkbox';
         checkbox.name = 'removes[]';
         checkbox.value = elem.id;
-
+        const div = create('site',);
+        const a = create('sites__link', '', '', 'a');
+        a.href = '/sites/'+elem.id;
         const link = create('sites__link', elem.link);
         const faculty_name = create('sites__faculty', elem.faculty.name);
-        
+        a.appendChild(link);
+        a.appendChild(faculty_name);
+
+        div.appendChild(a);
         const site = create('site');
         site.appendChild(checkbox);
-        site.appendChild(link);
-        site.appendChild(faculty_name);
+        site.appendChild(div);
 
         const sites = document.getElementById('sites');
         sites.appendChild(site);
