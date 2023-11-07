@@ -36,7 +36,7 @@
                     </a>
                 </div>
                 <div class="nav-item"> 
-                    <a href='/value'>
+                    <a href='/values'>
                          <button type="button" class="nav-btn" >Value</button>
                     </a>
                 </div>
@@ -52,6 +52,4 @@
             
         </div>
     </body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src={{ asset('js/web.js') }}></script>
 </html>

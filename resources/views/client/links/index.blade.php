@@ -4,7 +4,7 @@
 <div class="sites_create">
         <form class="mt-3" id="add-data">
                 <div class="btn-container">
-                    <button type="button" class="btn btn-success add-data"  id="create_new">Add site</button>
+                    <button type="button" class="btn btn-success add-data"  id="create_new">Add link</button>
                 </div>
                 <div class="form-group">
                     <label for="link">Link</label>

@@ -12,28 +12,27 @@ a {
 header {
     width: 20%;
     background-color: #e7e8f2;
-    background-image: linear-gradient(to bottom, #f5f6fa, #fff);
+    background-image: linear-gradient(to bottom, rgb(248, 249, 252), #fff);
 }
 .nav-item {
     display: flex;
     justify-content: center;
-    margin: 10px;
+    margin: 0 5px;
 }
 .nav-item a{
     width: 100%;
 }
 .nav-item a button{
+    text-align: start;
     width: 100%;
 }
 .nav-btn {
-    border: 1px solid #9abac2;
+    /* border: 1px solid #9abac2; */
     border-radius: 5px;
-    background: #f2fdff;
     color:#002831;
 }
 .nav-btn:hover {
-    /* color: #fff; */
-    background-color: #aee4f0;
+
 }
 
 .container {
@@ -76,7 +75,10 @@ header {
     border-left: none;
     border-right: none;
     border-bottom: 1px solid #43d9ff;
-    padding: 15px;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 10px;
+    background-color: #dff1fd;
 }
 .values-update {
     margin: 10px;
@@ -89,19 +91,22 @@ header {
     text-align: center;
 }
 button {
-    border: 1px solid #43d9ff;
+    /* border: 1px solid #43d9ff; */
+    border: none;
     border-radius: 10px;
-    background: #eafbff;
+    /* background: #eafbff; */
     color:#002831;
     padding: 5px 10px;
     font-size: 16px;
     font-weight: 500;
     transition: 0.2s all linear;
+    background-color: #ffffff00;
 }
 .form-remove {
-    border: 1px solid #F9322C;
+    /* border: 1px solid #F9322C; */
+    border: none;
     color: #F9322C;
-    background-color: #fff;
+    /* background-color: #fff; */
 }
 .form-remove:hover {
     background-color:#F9322C;
@@ -110,7 +115,7 @@ button {
 button:hover {
     cursor: pointer;
     /* color: #fff; */
-    background-color: #aee4f0;
+    background-color: #bbefee;
 }
 
 .create-form {

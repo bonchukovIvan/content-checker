@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\SitesController;
 use App\Http\Controllers\Api\V1\LinksController;
+use App\Http\Controllers\Api\V1\ValuesGroupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ use App\Http\Controllers\Api\V1\LinksController;
 Route::group(array('prefix' => '/v1'), function()
 {
     /*
-        Sites controller
+        Site controller
      */
     Route::get('sites', [SitesController::class, 'get_all'])->name('sites');
     Route::get('sites/{id}', [SitesController::class, 'get_one'])->name('sites.get_one');
@@ -29,17 +30,26 @@ Route::group(array('prefix' => '/v1'), function()
     Route::patch('sites/{id}', [SitesController::class, 'update'])->name('sites.update');
     Route::delete('sites', [SitesController::class, 'delete_multiple'])->name('sites.delete_multiple');
     /*
-        Links controller
+        Link controller
      */
     Route::get('links', [LinksController::class, 'get_all'])->name('links');
-    Route::get('links/{id}', [LinksController::class, 'get_one']);
+    Route::get('links/{id}', [LinksController::class, 'get_one'])->name('links.get_one');
 
     Route::post('links', [LinksController::class, 'store'])->name('links.store');
-    Route::patch('links/{id}', [LinksController::class, 'update'])->name('links.update  ');
+    Route::patch('links/{id}', [LinksController::class, 'update'])->name('links.update');
     Route::delete('links', [LinksController::class, 'delete_multiple'])->name('links.delete_multiple');
     /*
         Faculty controller
      */
     Route::get('faculties', [FacultiesController::class, 'get_all'])->name('faculties');
     Route::get('faculties/{id}', [FacultiesController::class, 'get_one']);
+    /*
+        ValuesGroup controller
+     */
+    Route::get('values-group', [ValuesGroupController::class, 'get_all'])->name('values-group');
+    Route::get('values-group/{id}', [ValuesGroupController::class, 'get_one'])->name('values-group.get_one');
+
+    Route::post('values-group', [ValuesGroupController::class, 'store'])->name('values-group.store');
+    Route::patch('values-group/{id}', [ValuesGroupController::class, 'update'])->name('values-group.update');
+    Route::delete('values-group', [ValuesGroupController::class, 'delete_multiple'])->name('values-group.delete_multiple');
 });

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Client\LinkController;
 use App\Http\Controllers\Client\SiteController;
+use App\Http\Controllers\Client\ValuesGroupController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,4 +45,8 @@ Route::controller(SiteController::class)->group(function () {
 Route::controller(LinkController::class)->group(function () {
     Route::get('links', 'index');
     Route::get('/links/{id}', 'get_one');
+});
+Route::controller(ValuesGroupController::class)->group(function () {
+    Route::get('values', 'index');
+    Route::get('/values/{id}', 'get_one');
 });
