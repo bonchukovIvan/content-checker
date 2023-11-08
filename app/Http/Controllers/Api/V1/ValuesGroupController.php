@@ -14,6 +14,7 @@ class ValuesGroupController extends Controller
     {
         $group = new Group;
         $group->name = $request->name;
+        $group->faculty_id = $request->faculty_id;
         $values_arr = [];
         foreach($request->values as $value) 
         {
@@ -27,19 +28,19 @@ class ValuesGroupController extends Controller
 
     public function get_all() 
     {
-        return response()->json(Group::with('values')->get());
+        return response()->json(Group::with('values', 'faculty')->get());
     }
 
     public function get_one(string $id) 
     {
-        return response()->json(Group::findOrFail($id)->load('values'));
+        return response()->json(Group::findOrFail($id)->load('values', 'faculty'));
     }
     public function update(Request $request, $id) 
     {
-        // return response($request);
         $group = Group::findOrFail($id);
         $group->update([
             'name' => $request->name,
+            'faculty_id' => $request->faculty_id,
         ]);
         foreach($request->values as $key => $value)
         {

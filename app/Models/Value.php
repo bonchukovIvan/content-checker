@@ -17,6 +17,7 @@ class Value extends Model
 
     protected $fillable = [
         'search_value',
+        'faculty_id',
     ];
     
     public function group()

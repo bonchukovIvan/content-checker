@@ -21,18 +21,13 @@
             <div class="header-container">
                 <div class="header-body">
                 <div class="nav-item">
-                    <a href='/logic/check'>
-                        <button type="button" class="nav-btn" >Check</button>
+                    <a href='/'>
+                        <button type="button" class="nav-btn" >Home</button>
                     </a>
                 </div>
                 <div class="nav-item"> 
                     <a href='/sites'>
                          <button type="button" class="nav-btn" >Sites</button>
-                    </a>
-                </div>
-                <div class="nav-item"> 
-                    <a href='/links'>
-                         <button type="button" class="nav-btn" >Links</button>
                     </a>
                 </div>
                 <div class="nav-item"> 

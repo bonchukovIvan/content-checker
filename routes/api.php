@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\SitesController;
 use App\Http\Controllers\Api\V1\LinksController;
 use App\Http\Controllers\Api\V1\ValuesGroupController;
+use App\Http\Controllers\Api\V1\LogicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,15 +31,6 @@ Route::group(array('prefix' => '/v1'), function()
     Route::patch('sites/{id}', [SitesController::class, 'update'])->name('sites.update');
     Route::delete('sites', [SitesController::class, 'delete_multiple'])->name('sites.delete_multiple');
     /*
-        Link controller
-     */
-    Route::get('links', [LinksController::class, 'get_all'])->name('links');
-    Route::get('links/{id}', [LinksController::class, 'get_one'])->name('links.get_one');
-
-    Route::post('links', [LinksController::class, 'store'])->name('links.store');
-    Route::patch('links/{id}', [LinksController::class, 'update'])->name('links.update');
-    Route::delete('links', [LinksController::class, 'delete_multiple'])->name('links.delete_multiple');
-    /*
         Faculty controller
      */
     Route::get('faculties', [FacultiesController::class, 'get_all'])->name('faculties');
@@ -52,4 +44,8 @@ Route::group(array('prefix' => '/v1'), function()
     Route::post('values-group', [ValuesGroupController::class, 'store'])->name('values-group.store');
     Route::patch('values-group/{id}', [ValuesGroupController::class, 'update'])->name('values-group.update');
     Route::delete('values-group', [ValuesGroupController::class, 'delete_multiple'])->name('values-group.delete_multiple');
+     /*
+        Logic controller
+     */
+    Route::get('logic', [LogicController::class, 'index'])->name('logic');
 });

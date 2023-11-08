@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('values_groups');
         Schema::create('values_groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedBigInteger('faculty_id')->nullable();
+            $table->foreign('faculty_id')->references('id')->on('faculties')->onUpdate('cascade')->onDelete('set null');
             $table->timestamps();
         });
     }

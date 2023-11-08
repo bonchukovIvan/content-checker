@@ -10,6 +10,9 @@
                 <label for="name">Group name</label>
                 <input type="text" name="name" id="name" class="form-control">
             </div>
+            <div class="form-group">
+                    <select id="options" name="faculty_id" ></select>
+            </div>
             <button type="button" onclick="addInput()">+</button>
             <div class="form-group">
                 <div id="values" class="values">
@@ -34,31 +37,48 @@
 <script src={{ asset('js/web.js') }}></script>
 <script src={{ asset('js/elements.js') }}></script>
 <script src={{ asset('js/btn.js') }}></script>
+<script src={{ asset('js/faculty.js') }}></script>
 
 <script>
+    faculties.forEach(elem => 
+    {
+        const option = create('option', elem.name, '', 'option');
+        option.value = elem.id;
+        
+        const options = document.getElementById('options');
+        options.appendChild(option);
+
+    });
 
     get("{{ route('values-group') }}", (response) => 
     {
         
         response.forEach((elem) => 
         {
+
             const checkbox = create('haystack__check', '', '', 'input');
             checkbox.type = 'checkbox';
             checkbox.name = 'removes[]';
             checkbox.value = elem.id;
-            console.log(response);
+
             const name = create('name', elem.name);
+            // const faculty_name = create('sites__faculty', '');
 
             const a = create('groups_a', '', '', 'a');
+            
             a.appendChild(name);
             a.href = '/values/'+elem.id;
 
             const div = create('group');
             div.appendChild(checkbox);
             div.appendChild(a);
-    
+            if(elem.faculty_id)
+            {
+                const faculty_name = create('sites__faculty', elem.faculty.name);
+                div.appendChild(faculty_name);
+            }
+
             const group_values = create('group-values');
-   
 
             if(elem.values)
             {
@@ -91,7 +111,6 @@
             checkbox.type = 'checkbox';
             checkbox.name = 'removes[]';
             checkbox.value = elem.id;
-            console.log(response);
             const name = create('name', elem.name);
 
             const a = create('groups_a', '', '', 'a');
@@ -101,9 +120,13 @@
             const div = create('group');
             div.appendChild(checkbox);
             div.appendChild(a);
+            if(elem.faculty_id)
+            {
+                const faculty_name = create('sites__faculty', elem.faculty.name);
+                div.appendChild(faculty_name);
+            }
     
             const group_values = create('group-values');
-   
 
             if(elem.values)
             {

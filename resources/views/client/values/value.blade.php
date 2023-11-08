@@ -11,6 +11,9 @@
                     <input type="text" name="name" id="name" class="form-control">
                 </div>
                 <div class="form-group">
+                    <select id="options" name="faculty_id" ></select>
+                </div>
+                <div class="form-group">
                     <button type="button" onclick="addNewInput()">+</button>
                 </div>
                 <div class="form-group">
@@ -24,11 +27,23 @@
 <script src={{ asset('js/web.js') }}></script>
 <script src={{ asset('js/elements.js') }}></script>
 <script src={{ asset('js/btn.js') }}></script>
+<script src={{ asset('js/faculty.js') }}></script>
 <script>
+
+    faculties.forEach(elem => 
+    {
+        const option = create('option', elem.name, '', 'option');
+        option.value = elem.id;
+        
+        const options = document.getElementById('options');
+        options.appendChild(option);
+    });
+    fetch
 
     get("{{ route('values-group.get_one', $id) }}", (response) => 
     {
-
+        const options = document.getElementById('options');
+        options.value = response.faculty.id;
         const link = document.getElementById('name');
         link.value = response.name;
 

@@ -34,6 +34,9 @@ header {
 .nav-btn:hover {
 
 }
+.groups-values {
+    width: 450px;
+}
 
 .container {
     width: 100%;
