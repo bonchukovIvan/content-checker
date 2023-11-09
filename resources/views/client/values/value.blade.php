@@ -17,7 +17,7 @@
                     <button type="button" onclick="addNewInput()">+</button>
                 </div>
                 <div class="form-group">
-                <div id="values" class="values">
+                <div id="values" class="result-values">
                 </div>
             </div>
         </form>
@@ -43,7 +43,7 @@
     get("{{ route('values-group.get_one', $id) }}", (response) => 
     {
         const options = document.getElementById('options');
-        options.value = response.faculty.id;
+        options.value = response.faculty_id;
         const link = document.getElementById('name');
         link.value = response.name;
 

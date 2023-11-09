@@ -35,17 +35,15 @@ class LogicController extends Controller
                     }
                     if (str_contains(strtolower($content), strtolower(trim($value->search_value))))
                     {
-                        // $finals[$site->link][$group->name] = true;
                         array_push($values, ['name' => $group->name, 'result' => true]);
                         $scss++;
                         break;
                     }
-                    // $finals[$site->link][$group->name] = false;
                     array_push($values, ['name' => $group->name, 'result' => false]);
                     
                 }
             }
-            $test['Success'] = floor(($scss/count($values))*100);
+            $test['success'] = floor(($scss/count($values))*100);
             $test['values'] = $values;
             array_push($finals, $test);
    

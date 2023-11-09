@@ -18,20 +18,63 @@
     get("{{ route('logic') }}", (response) => 
     {
         console.log(response);
-        // for (const [key, value] of Object.entries(response)) 
-        // {
-        //     const div = create('result');
-        //     const link = create('link', key);
-        //     div.appendChild(link);
-        //     for (const [name, res] of Object.entries(value)) 
-        //     {
-        //         console.log(`${name}: ${res}`);
+        response.forEach((elem) => 
+        {
+            const div = create('result');
+            const link = create('link', elem.link);
+            const success = create('group__success', elem.success+'%');
+            const head = create('head');
+            const btn = create('collapsible', '+', '', 'button')
+            btn.addEventListener('click', () => 
+            {
+                btn.classList.toggle('active');
                 
-        //     }
+                let content = btn.nextElementSibling;
+                content.classList.toggle('active-values');
+                if (content.style.maxHeight)
+                {
+                    content.style.maxHeight = null;
+                    btn.innerText = '+';
+                }
+                else
+                {
+                    
+                    // content.style.maxHeight = content.scrollHeight +'px';
+                    content.style.maxHeight = 100+'%';
+                    btn.innerText = '-';
+                }
+            });
+            head.appendChild(link);
+            head.appendChild(success);
+            div.appendChild(head);
+            div.appendChild(btn);
+            const values = create('result__values');
+            elem.values.forEach((value) => 
+            {
+                const group = create('group');
+               
+                const group_name = create('group__name', value.name);
+                const group_result = create('group__result', value.result);
 
-        //     const results = document.getElementById('results'); 
-        //     results.appendChild(div);
-        // }
+                if (!value.result) 
+                {
+                    group.classList.add('result-false');
+                    group_result.innerText = 'false';
+                }
+                else
+                {
+                    group.classList.add('result-true');
+                }
+                const div = create('value');
+                group.appendChild(group_name);
+                group.appendChild(group_result);
+                values.appendChild(group);
+            }); 
+            div.appendChild(values);
+            const results = document.getElementById('results'); 
+            results.appendChild(div);
+        }); 
     });
+
 </script>
 @endsection

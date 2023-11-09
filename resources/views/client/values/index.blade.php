@@ -29,7 +29,7 @@
         <div class="btn-container">
             <button type="button" class="btn btn-success remove-data"  id="create_new">Remove selected</button>
         </div>
-        <div id="groups-values" class="groups-values"></div>
+        <div id="values__groups-values" class="values__groups-values"></div>
     </form>
 </div>
 
@@ -56,50 +56,52 @@
         response.forEach((elem) => 
         {
 
-            const checkbox = create('haystack__check', '', '', 'input');
+            const checkbox = create('values__check', '', '', 'input');
             checkbox.type = 'checkbox';
             checkbox.name = 'removes[]';
             checkbox.value = elem.id;
 
             const name = create('name', elem.name);
             // const faculty_name = create('sites__faculty', '');
-
-            const a = create('groups_a', '', '', 'a');
+            
+            const a = create('values__groups_a', '', '', 'a');
             
             a.appendChild(name);
             a.href = '/values/'+elem.id;
-
-            const div = create('group');
-            div.appendChild(checkbox);
-            div.appendChild(a);
+            const group_head = create('group__head');
+            group_head.appendChild(a);
+            group_head.appendChild(checkbox);
+            const div = create('values__group');
+            div.appendChild(group_head);
             if(elem.faculty_id)
             {
-                const faculty_name = create('sites__faculty', elem.faculty.name);
+                const faculty_name = create('values__faculty', elem.faculty.name);
                 div.appendChild(faculty_name);
             }
 
-            const group_values = create('group-values');
+            const group_values = create('values__group-values');
 
             if(elem.values)
             {
                 elem.values.forEach((element) =>
                 {
-                    const value = create('group-value');
-                    const value_name = create('group-value__name', element.search_value);
+                    const value = create('values__group-value');
+                    const value_name = create('values__group-value__name', element.search_value);
                     value.appendChild(value_name);
                     group_values.appendChild(value);
                 });
             }
 
-            const groups = document.getElementById('groups-values');
+            const groups = document.getElementById('values__groups-values');
+            div.appendChild(group_values);
             groups.appendChild(div);
-            groups.appendChild(group_values);
+            
         });
     });
 
     request('add-data', "{{ route('values-group.store') }}", 'post', (response) => 
     {
-        const sites = document.getElementById('groups-values');
+        const sites = document.getElementById('values__groups-values');
         sites.innerHTML = '';
         document.getElementById("add-data").reset();
         console.log(response)
@@ -107,85 +109,100 @@
         {
             response.forEach((elem) => 
         {
-            const checkbox = create('haystack__check', '', '', 'input');
+
+            const checkbox = create('values__check', '', '', 'input');
             checkbox.type = 'checkbox';
             checkbox.name = 'removes[]';
             checkbox.value = elem.id;
-            const name = create('name', elem.name);
 
-            const a = create('groups_a', '', '', 'a');
+            const name = create('name', elem.name);
+            // const faculty_name = create('sites__faculty', '');
+            
+            const a = create('values__groups_a', '', '', 'a');
+            
             a.appendChild(name);
             a.href = '/values/'+elem.id;
-
-            const div = create('group');
-            div.appendChild(checkbox);
-            div.appendChild(a);
+            const group_head = create('group__head');
+            group_head.appendChild(a);
+            group_head.appendChild(checkbox);
+            const div = create('values__group');
+            div.appendChild(group_head);
             if(elem.faculty_id)
             {
-                const faculty_name = create('sites__faculty', elem.faculty.name);
+                const faculty_name = create('values__faculty', elem.faculty.name);
                 div.appendChild(faculty_name);
             }
-    
-            const group_values = create('group-values');
+
+            const group_values = create('values__group-values');
 
             if(elem.values)
             {
                 elem.values.forEach((element) =>
                 {
-                    const value = create('group-value');
-                    const value_name = create('group-value__name', element.search_value);
+                    const value = create('values__group-value');
+                    const value_name = create('values__group-value__name', element.search_value);
                     value.appendChild(value_name);
                     group_values.appendChild(value);
                 });
             }
 
-            const groups = document.getElementById('groups-values');
+            const groups = document.getElementById('values__groups-values');
+            div.appendChild(group_values);
             groups.appendChild(div);
-            groups.appendChild(group_values);
+            
         });
         });
     });
 
     request('remove-data', "{{ route('values-group.delete_multiple') }}", 'delete', (response) => 
     {
-        const sites = document.getElementById('groups-values');
+        const sites = document.getElementById('values__groups-values');
         sites.innerHTML = '';
         get("{{ route('values-group') }}", (response) => 
         {
             response.forEach((elem) => 
         {
-            const checkbox = create('haystack__check', '', '', 'input');
+
+            const checkbox = create('values__check', '', '', 'input');
             checkbox.type = 'checkbox';
             checkbox.name = 'removes[]';
             checkbox.value = elem.id;
-            console.log(response);
-            const name = create('name', elem.name);
 
-            const a = create('groups_a', '', '', 'a');
+            const name = create('name', elem.name);
+            // const faculty_name = create('sites__faculty', '');
+            
+            const a = create('values__groups_a', '', '', 'a');
+            
             a.appendChild(name);
             a.href = '/values/'+elem.id;
+            const group_head = create('group__head');
+            group_head.appendChild(a);
+            group_head.appendChild(checkbox);
+            const div = create('values__group');
+            div.appendChild(group_head);
+            if(elem.faculty_id)
+            {
+                const faculty_name = create('values__faculty', elem.faculty.name);
+                div.appendChild(faculty_name);
+            }
 
-            const div = create('group');
-            div.appendChild(checkbox);
-            div.appendChild(a);
-    
-            const group_values = create('group-values');
-   
+            const group_values = create('values__group-values');
 
             if(elem.values)
             {
                 elem.values.forEach((element) =>
                 {
-                    const value = create('group-value');
-                    const value_name = create('group-value__name', element.search_value);
+                    const value = create('values__group-value');
+                    const value_name = create('values__group-value__name', element.search_value);
                     value.appendChild(value_name);
                     group_values.appendChild(value);
                 });
             }
 
-            const groups = document.getElementById('groups-values');
+            const groups = document.getElementById('values__groups-values');
+            div.appendChild(group_values);
             groups.appendChild(div);
-            groups.appendChild(group_values);
+            
         });
         });
     });

@@ -17,7 +17,8 @@ header {
 .nav-item {
     display: flex;
     justify-content: center;
-    margin: 0 5px;
+    margin: 10px 5px;
+    width: 70%;
 }
 .nav-item a{
     width: 100%;
@@ -31,9 +32,7 @@ header {
     border-radius: 5px;
     color:#002831;
 }
-.nav-btn:hover {
 
-}
 .groups-values {
     width: 450px;
 }
@@ -106,18 +105,14 @@ button {
     background-color: #ffffff00;
 }
 .form-remove {
-    /* border: 1px solid #F9322C; */
     border: none;
     color: #F9322C;
-    /* background-color: #fff; */
 }
 .form-remove:hover {
     background-color:#F9322C;
-    /* color: #fff; */
 }
 button:hover {
     cursor: pointer;
-    /* color: #fff; */
     background-color: #bbefee;
 }
 
@@ -185,4 +180,110 @@ label {
     color: #fff;
     padding: 10px;
     font-weight: 600;
+}
+
+.result {
+    background-color: #2a2a2a;
+    margin: 15px;
+    border-radius: 10px;
+    color: #fff;
+}
+.result button {
+    color: #fff;
+    margin: 10px;
+    font-weight: 600;
+    width: 5    0%;
+}
+.result button:hover {
+    color: #000;
+}
+.head {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.result__values{
+    max-height: 0; 
+    overflow: hidden;
+}
+.result__values.active-values{
+    padding: 25px;
+} 
+.group {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+.result-false{
+    color: red;
+    font-weight: 500;
+}
+.group__success {
+    font-weight: 500;
+    background: #bbefee;
+    border-radius: 15px;
+    padding: 5px;
+    color: #000;
+    font-size: 12px;
+}
+.values__group {
+    background-color: #c8e5e1;
+    border-radius: 10px;
+    margin: 10px;
+    padding:15px;
+}
+.group__head {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    
+   }
+   .group__head a {
+    color: #000;
+   }
+   .group__head a:hover {
+    text-decoration: underline;
+   }
+   .values__group-values {
+    margin: 10px 0;
+}
+
+.values__group-value__name {
+    margin: 10px 0;
+ }
+ 
+ .values__faculty {
+    /* text-align: center; */
+    font-size:14px;
+    font-weight: 500
+ }
+
+.sites {
+    width: 500px;
+}
+.site {
+    background-color: #c8e5e1;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 15px;
+}
+.site__head {
+    display:flex;
+    justify-content: space-between;
+}
+.site__head a{
+    font-weight:500;
+    color: #000;
+}
+.site__head a:hover{
+    text-decoration: underline;
+}
+   
+.sites__faculty {
+    margin-top: 10px;
+}
+
+div#values__groups-values {
+    width: 750px;
 }
