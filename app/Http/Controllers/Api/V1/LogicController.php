@@ -22,36 +22,55 @@ class LogicController extends Controller
             $values = [];
             $content = self::file_get_contents_curl($site->link);
             $scss = 0;
+            $buff = [];
             foreach($groups as $group) 
             {
+                $group_arr = [];
+                $res = [];
                 foreach($group->values as $value) 
                 {
                     if ($group->faculty_id)
                     {
                         if ($group->faculty->name != $site->faculty->name) 
                         {
-                            continue;
+                            continue 2;
                         }
                     }
-                    if (str_contains(strtolower($content), strtolower(trim($value->search_value))))
-                    {
-                        array_push($values, ['name' => $group->name, 'result' => true]);
-                        $scss++;
-                        break;
-                    }
-                    array_push($values, ['name' => $group->name, 'result' => false]);
-                    
+                    $result = str_contains(mb_strtolower($content), mb_strtolower(trim($value->search_value)));
+                  
+                    array_push($group_arr, ['name' => $group->name, 'value' => $value->search_value,  'result' => $result]);  
+                }
+
+                $res['result'] = self::array_any($group_arr, true);
+                $res['name'] = $group->name;   
+                
+                array_push($buff, $res);
+                
+                // $test['values'] = $group_arr;
+                // $test['success'] = floor(($scss/count($group_arr))*100);
+            }
+            $we = 0;
+            foreach($buff as $b)
+            {
+                $we++;
+                if($b['result'] === true) 
+                {
+                    $scss++;
                 }
             }
-            $test['success'] = floor(($scss/count($values))*100);
-            $test['values'] = $values;
+
+            $test['success'] = floor(($scss/$we)*100);
+            $test['values'] = $buff;
             array_push($finals, $test);
-   
+            // $test['values'] = $values;
+            
         }
         return response($finals);
+        // return response(str_contains(mb_strtolower(self::file_get_contents_curl('https://law.sumdu.edu.ua/')), mb_strtolower(trim('директор інституту'))));
     }
 
-    static public function file_get_contents_curl($url) {
+    static public function file_get_contents_curl($url) 
+    {
         $ch = curl_init();
     
         curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
@@ -65,4 +84,17 @@ class LogicController extends Controller
     
         return $data;
     }
+
+    static public function array_any(array $array, $fn) 
+    {
+        foreach ($array as $item) 
+        {
+            if ($item['result'] === true)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }
