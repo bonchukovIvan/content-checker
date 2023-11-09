@@ -18,14 +18,14 @@ header {
     display: flex;
     justify-content: center;
     margin: 10px 5px;
-    width: 70%;
+    width: 100%;
 }
 .nav-item a{
     width: 100%;
 }
 .nav-item a button{
     text-align: start;
-    width: 100%;
+    width: 90%;
 }
 .nav-btn {
     /* border: 1px solid #9abac2; */
@@ -104,18 +104,26 @@ button {
     transition: 0.2s all linear;
     background-color: #ffffff00;
 }
-.form-remove {
-    border: none;
-    color: #F9322C;
-}
-.form-remove:hover {
-    background-color:#F9322C;
+button.remove-data:hover{
+    background-color: #F9322C;
 }
 button:hover {
     cursor: pointer;
     background-color: #bbefee;
 }
-
+.btn-container.check {
+   
+    margin: 20px 0;
+ }
+.btn-container.check button:hover {
+   background-color: #fbac5f;
+   
+}
+.btn-container.check button{
+   font-weight:600;
+    padding: 5px 50px ;
+   
+ }
 .create-form {
     padding: 0 250px;
 }
@@ -192,7 +200,7 @@ label {
     color: #fff;
     margin: 10px;
     font-weight: 600;
-    width: 5    0%;
+    width: 50%;
 }
 .result button:hover {
     color: #000;
@@ -220,7 +228,7 @@ label {
     font-weight: 500;
 }
 .group__success {
-    font-weight: 500;
+    font-weight: 800;
     background: #bbefee;
     border-radius: 15px;
     padding: 5px;
@@ -263,7 +271,7 @@ label {
     width: 500px;
 }
 .site {
-    background-color: #c8e5e1;
+    background-color: #fbac5f;
     border-radius: 10px;
     margin: 10px;
     padding: 15px;
@@ -286,4 +294,12 @@ label {
 
 div#values__groups-values {
     width: 750px;
+}
+
+select#options {
+    /* background-color: #e4f8ff; */
+    padding: 5px 15px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
 }

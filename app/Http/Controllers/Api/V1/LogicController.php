@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Group;
 use App\Models\Site;
-use App\Models\Value;
 
 class LogicController extends Controller
 {
@@ -45,9 +44,6 @@ class LogicController extends Controller
                 $res['name'] = $group->name;   
                 
                 array_push($buff, $res);
-                
-                // $test['values'] = $group_arr;
-                // $test['success'] = floor(($scss/count($group_arr))*100);
             }
             $we = 0;
             foreach($buff as $b)
@@ -62,11 +58,9 @@ class LogicController extends Controller
             $test['success'] = floor(($scss/$we)*100);
             $test['values'] = $buff;
             array_push($finals, $test);
-            // $test['values'] = $values;
             
         }
         return response($finals);
-        // return response(str_contains(mb_strtolower(self::file_get_contents_curl('https://law.sumdu.edu.ua/')), mb_strtolower(trim('директор інституту'))));
     }
 
     static public function file_get_contents_curl($url) 

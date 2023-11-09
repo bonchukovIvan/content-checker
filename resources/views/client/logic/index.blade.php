@@ -3,8 +3,8 @@
 <div class="check">
     <div class="check-container">
         <div class="check-body">
-        <div class="btn-container">
-                <button type="button" class="btn btn-success add-data"  id="check-btn">Add group</button>
+        <div class="btn-container check">
+                <button type="button" class="btn btn-success add-data"  id="check-btn">Check</button>
         </div>
         <div id="results" class="results"></div>
         </div>
@@ -15,66 +15,84 @@
 <script src={{ asset('js/web.js') }}></script>
 <script src={{ asset('js/elements.js') }}></script>
 <script>
-    get("{{ route('logic') }}", (response) => 
+    let btn = document.getElementById('check-btn');
+    btn.addEventListener('click', () => 
     {
-        console.log(response);
-        response.forEach((elem) => 
+        const res = document.getElementById('results'); 
+        res.innerHTML = '';   
+        $.ajax(
         {
-            const div = create('result');
-            const link = create('link', elem.link);
-            const success = create('group__success', elem.success+'%');
-            const head = create('head');
-            const btn = create('collapsible', '+', '', 'button')
-            btn.addEventListener('click', () => 
+            type: 'get',
+            url: "{{ route('logic') }}",
+            beforeSend: function(){
+                $('#check-btn').html('....Please wait');
+            },
+            success: function(response){
+                response.forEach((elem) => 
             {
-                btn.classList.toggle('active');
-                
-                let content = btn.nextElementSibling;
-                content.classList.toggle('active-values');
-                if (content.style.maxHeight)
+                const div = create('result');
+                const link = create('link', elem.link);
+                const success = create('group__success', elem.success+'%');
+                const head = create('head');
+                const btn = create('collapsible', '+', '', 'button')
+                btn.addEventListener('click', () => 
                 {
-                    content.style.maxHeight = null;
-                    btn.innerText = '+';
-                }
-                else
-                {
+                    btn.classList.toggle('active');
                     
-                    // content.style.maxHeight = content.scrollHeight +'px';
-                    content.style.maxHeight = 100+'%';
-                    btn.innerText = '-';
-                }
-            });
-            head.appendChild(link);
-            head.appendChild(success);
-            div.appendChild(head);
-            div.appendChild(btn);
-            const values = create('result__values');
-            elem.values.forEach((value) => 
-            {
-                const group = create('group');
-               
-                const group_name = create('group__name', value.name);
-                const group_result = create('group__result', value.result);
+                    let content = btn.nextElementSibling;
+                    content.classList.toggle('active-values');
+                    if (content.style.maxHeight)
+                    {
+                        content.style.maxHeight = null;
+                        btn.innerText = '+';
+                    }
+                    else
+                    {
+                        
+                        // content.style.maxHeight = content.scrollHeight +'px';
+                        content.style.maxHeight = 100+'%';
+                        btn.innerText = '-';
+                    }
+                });
+                head.appendChild(link);
+                head.appendChild(success);
+                div.appendChild(head);
+                div.appendChild(btn);
+                const values = create('result__values');
+                elem.values.forEach((value) => 
+                {
+                    const group = create('group');
+                
+                    const group_name = create('group__name', value.name);
+                    const group_result = create('group__result', value.result);
 
-                if (!value.result) 
-                {
-                    group.classList.add('result-false');
-                    group_result.innerText = 'false';
-                }
-                else
-                {
-                    group.classList.add('result-true');
-                }
-                const div = create('value');
-                group.appendChild(group_name);
-                group.appendChild(group_result);
-                values.appendChild(group);
+                    if (!value.result) 
+                    {
+                        group.classList.add('result-false');
+                        group_result.innerText = 'false';
+                    }
+                    else
+                    {
+                        group.classList.add('result-true');
+                    }
+                    const div = create('value');
+                    group.appendChild(group_name);
+                    group.appendChild(group_result);
+                    values.appendChild(group);
+                }); 
+                div.appendChild(values);
+                const results = document.getElementById('results'); 
+                results.appendChild(div);
             }); 
-            div.appendChild(values);
-            const results = document.getElementById('results'); 
-            results.appendChild(div);
-        }); 
-    });
+            },
+            complete: function(response){
+                $('#check-btn').html('Check again');
+            }
+        });
+    
+    }
+    );
+    
 
 </script>
 @endsection
