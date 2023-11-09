@@ -38,7 +38,6 @@
         const options = document.getElementById('options');
         options.appendChild(option);
     });
-    fetch
 
     get("{{ route('values-group.get_one', $id) }}", (response) => 
     {

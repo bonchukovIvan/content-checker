@@ -8,11 +8,17 @@ body {
 a {
     text-decoration: none;
 }
+i {
+    color:#797979
+}
 
 header {
     width: 20%;
     background-color: #e7e8f2;
     background-image: linear-gradient(to bottom, rgb(248, 249, 252), #fff);
+}
+.header-body {
+    padding: 15px;
 }
 .nav-item {
     display: flex;
@@ -27,8 +33,10 @@ header {
     text-align: start;
     width: 90%;
 }
+.nav-item a button:hover{
+   background-color: #d3d3d3;
+}
 .nav-btn {
-    /* border: 1px solid #9abac2; */
     border-radius: 5px;
     color:#002831;
 }
@@ -43,19 +51,10 @@ header {
 
 .panel-body {
    display: flex;
-   /* text-align: center; */
    justify-content: space-around;
+   padding: 15px;
 }
 
-.page-header h1 {
-    border-left: 3px solid #EF7918;
-    padding: 15px;
-    margin: 25px;
-    font-size: 33px;
-    font-weight: 500;
-    line-height: 1.2;
-    width: 10vh;
-}
 .mt-3 {
     margin: 35px 0;
     align-items: center;
@@ -72,15 +71,15 @@ header {
     margin: 0 10px; 
 }
 .form-group input{
-    width: 100%;
+    width: 90%;
     border-top: none;
     border-left: none;
     border-right: none;
-    border-bottom: 1px solid #43d9ff;
+    border-bottom: 1px solid #d3d3d3;
     border-radius: 5px;
     margin: 5px;
     padding: 10px;
-    background-color: #dff1fd;
+    background-color: #f1f1f1;
 }
 .values-update {
     margin: 10px;
@@ -104,12 +103,17 @@ button {
     transition: 0.2s all linear;
     background-color: #ffffff00;
 }
+button.remove-data{
+    font-weight: 600;
+}
 button.remove-data:hover{
     background-color: #F9322C;
+    color: #fff;
 }
 button:hover {
     cursor: pointer;
-    background-color: #bbefee;
+    /* background-color: #bbefee; */
+    background-color: #d3d3d3
 }
 .btn-container.check {
    
@@ -128,66 +132,14 @@ button:hover {
     padding: 0 250px;
 }
 
-.haystacks-list {
-    /* padding: 0 250px; */
-    width: 100%;
-    background-image: linear-gradient(to bottom, #f5f6fa, #fff);
-}
-.haystack {
-    padding: 10px;
-    border: 1px solid #43d9ff;
-    border-radius: 10px;
-    margin: 10px;
-    background: #cbf5ff;
-}
-.haystack__title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px dashed;
-    padding: 0 0 5px 0;
-    margin-bottom: 5px; 
-}
-.haystack__name {
-    font-size: 24px;
-    font-weight: 600;
-    color: #11667a;
-}
-.haystack__check {
-  height: 15px;
-  width: 15px;
-  margin-right: 10px;
-  background-color: #eee;
-}
 label {
     font-weight: 600;
-}
-.needles {
-    margin-top: 10px;
-}
-.needle_value {
-    margin: 5px 0;
 }
 
 .check {
     font-size: 18px;
     width: 100%;
     text-align: center;
-}
-.resneed {
-    padding: 10px;
-}
-.result__needles-true {
-    display: flex;
-    justify-content: space-between;
-}
-.result__needles-false {
-    display: flex;
-    justify-content: space-between;
-    background-color: #F9322C;
-    color: #fff;
-    padding: 10px;
-    font-weight: 600;
 }
 
 .result {
@@ -217,6 +169,8 @@ label {
 }
 .result__values.active-values{
     padding: 25px;
+    background-color: #303030;
+    border-radius: 5px;
 } 
 .group {
     display: flex;
@@ -266,9 +220,18 @@ label {
     font-size:14px;
     font-weight: 500
  }
-
+ .sites-container,
+ .sites_create {
+    background-color: #fbfbfb;
+    border-radius: 10px;
+    margin: 10px 0;
+    box-shadow: 0px 0px 7px 0px rgb(147 147 147 / 39%);
+    padding: 5px;
+    height: max-content;
+ }
 .sites {
-    width: 500px;
+    width: 750px;
+    
 }
 .site {
     background-color: #fbac5f;
@@ -297,7 +260,7 @@ div#values__groups-values {
 }
 
 select#options {
-    /* background-color: #e4f8ff; */
+    background-color: #f1f1f1;
     padding: 5px 15px;
     font-size: 15px;
     font-weight: 600;

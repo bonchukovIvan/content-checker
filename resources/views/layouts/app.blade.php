@@ -13,6 +13,7 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/reset.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
     </head>
     <body>
@@ -22,16 +23,19 @@
                 <div class="header-body">
                 <div class="nav-item">
                     <a href='/'>
+                    <i class="fa fa-home"></i>
                         <button type="button" class="nav-btn" >Home</button>
                     </a>
                 </div>
                 <div class="nav-item"> 
                     <a href='/sites'>
+                    <i class="fa fa-link"></i>
                          <button type="button" class="nav-btn" >Sites</button>
                     </a>
                 </div>
                 <div class="nav-item"> 
                     <a href='/values'>
+                    <i class="fa fa-copy"></i>
                          <button type="button" class="nav-btn" >Value</button>
                     </a>
                 </div>

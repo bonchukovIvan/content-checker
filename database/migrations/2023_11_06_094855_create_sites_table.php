@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
             $table->string('link');
-            $table->unsignedBigInteger('faculty_id');
-            $table->foreign('faculty_id')->references('id')->on('faculties')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('faculty_id')->nullable();
+            $table->foreign('faculty_id')->references('id')->on('faculties')->onUpdate('cascade')->onDelete('set null');
             $table->timestamps();
         });
     }

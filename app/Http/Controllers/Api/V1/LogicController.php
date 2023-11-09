@@ -28,7 +28,7 @@ class LogicController extends Controller
                 $res = [];
                 foreach($group->values as $value) 
                 {
-                    if ($group->faculty_id)
+                    if ($group->faculty_id && $site->faculty_id)
                     {
                         if ($group->faculty->name != $site->faculty->name) 
                         {

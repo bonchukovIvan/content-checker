@@ -27,7 +27,8 @@ function display_sites(response) {
         const a = create('site__link', '', '', 'a');
         a.href = '/sites/'+elem.id;
         const link = create('sites__link', elem.link);
-        const faculty_name = create('sites__faculty', elem.faculty.name);
+
+        
         a.appendChild(link);
 
         head.appendChild(a);
@@ -35,7 +36,12 @@ function display_sites(response) {
         head.appendChild(checkbox);
         const site = create('site');
         site.appendChild(head);
-        site.appendChild(faculty_name);
+        if(elem.faculty_id) 
+        {
+            const faculty_name = create('sites__faculty', elem.faculty.name);
+            site.appendChild(faculty_name);
+        }
+        
         const sites = document.getElementById('sites');
         sites.appendChild(site);
     });

@@ -29,6 +29,7 @@
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src={{ asset('js/web.js') }}></script>
 <script src={{ asset('js/elements.js') }}></script>
+<script src={{ asset('js/faculty.js') }}></script>
 <script>
 
     get("{{ route('sites') }}", (response) => 
@@ -36,9 +37,7 @@
         display_sites(response);
     });
 
-    get("{{ route('faculties') }}", (response) => 
-    {
-        response.forEach(elem => 
+    faculties.forEach(elem => 
         {
             const option = create('option', elem.name, '', 'option');
             option.value = elem.id;
@@ -46,7 +45,6 @@
             options.appendChild(option);
 
         });
-    });
 
     request('add-data', "{{ route('sites.store') }}", 'post', (response) => 
     {
