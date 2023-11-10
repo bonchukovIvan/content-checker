@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('needles', function (Blueprint $table) {
+        Schema::create('search_values', function (Blueprint $table) {
             $table->id();
-            $table->string('value');
-            $table->unsignedBigInteger('haystack_id');
-            $table->foreign('haystack_id')->references('id')->on('haystacks')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('search_value');
+            $table->unsignedBigInteger('values_group_id');
+            $table->foreign('values_group_id')->references('id')->on('values_groups')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('needles');
+        Schema::dropIfExists('search_values');
     }
 };
