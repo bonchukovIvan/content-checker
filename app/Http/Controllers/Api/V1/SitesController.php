@@ -30,7 +30,7 @@ class SitesController extends Controller
     {
         $site = Site::findOrFail($id);
         $site->update([
-            'sites_link' => $request->sites_link,
+            'link' => $request->link,
             'faculty_id' => $request->faculty_id,
         ]);
         return response($site);
