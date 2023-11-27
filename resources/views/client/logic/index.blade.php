@@ -28,6 +28,7 @@
                 $('#check-btn').html('....Please wait');
             },
             success: function(response){
+                console.log(response)
                 response.forEach((elem) => 
             {
                 const div = create('result');

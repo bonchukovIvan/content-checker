@@ -19,6 +19,7 @@
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src={{ asset('js/web.js') }}></script>
 <script src={{ asset('js/elements.js') }}></script>
+<script src={{ asset('js/faculty.js') }}></script>
 <script>
     function fetchFirstResource() 
     {
@@ -30,16 +31,6 @@
             options.value = response.faculty.id;
         });
     }
-    const faculties = [
-        { id: "1", name: "teset" },
-        { id: "2", name: "elit" },
-        { id: "3", name: "biem" },
-        { id: "4", name: "ifsk" },
-        { id: "5", name: "nnip" },
-        { id: "6", name: "nnmi" },
-        { id: "7", name: "all" },
-        { id: "8", name: "general" }
-    ];
     
     faculties.forEach(elem => 
     {
