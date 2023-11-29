@@ -12,6 +12,7 @@
                 </div>
                 <div class="form-group">
                     <select id="options" name="faculty_id" ></select>
+                    <div id="form-departament" class="form-departament"></div>
                 </div>
                 <div class="form-group">
                     <button type="button" onclick="addNewInput()">+</button>
@@ -28,6 +29,7 @@
 <script src={{ asset('js/elements.js') }}></script>
 <script src={{ asset('js/btn.js') }}></script>
 <script src={{ asset('js/faculty.js') }}></script>
+<script src={{ asset('js/departament.js') }}></script>
 <script>
 
     faculties.forEach(elem => 
@@ -45,7 +47,29 @@
         options.value = response.faculty_id;
         const link = document.getElementById('name');
         link.value = response.name;
-
+        console.log(response)
+        dep_id = [];
+        response.departaments.forEach((elem) => {
+            dep_id.push(elem.id);
+        })
+        console.log(dep_id)
+        departaments.forEach(elem => 
+            {
+                const checkbox = create('departament__check', '', '', 'input');
+                checkbox.type = 'checkbox';
+                checkbox.name = 'departaments_id[]';
+                checkbox.value = elem.id;
+                if (dep_id.includes(parseInt(checkbox.value))) {
+                    checkbox.checked = true;
+                }
+                const div = create('option');
+                const label = create('departament__label', elem.name);
+                div.appendChild(label);
+                div.appendChild(checkbox);
+                
+                const options = document.getElementById('form-departament');
+                options.appendChild(div);
+            });
         response.values.forEach((elem) => 
         {
             const input = create('value_input', '', '', 'input');
@@ -53,6 +77,8 @@
             input.name = 'values['+elem.id+']';
             input.value = elem.search_value;
             const label = create('value_label', 'Value', '', 'label');
+
+
 
             const div = create('value');
             div.appendChild(label);
@@ -84,5 +110,9 @@
             link.appendChild(div);
         });
     });
+
+    function activateCheckboxes(values) {
+
+    }
 </script>
 @endsection

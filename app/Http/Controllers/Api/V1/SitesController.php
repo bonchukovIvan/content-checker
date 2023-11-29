@@ -13,18 +13,19 @@ class SitesController extends Controller
         $site = new Site;
         $site->link = $request->link;
         $site->faculty_id = $request->faculty_id;
+        $site->departament_id = $request->departament_id;
         $site->save();
         return response()->json($request);
     }
 
     public function get_all() 
     {
-        return response()->json(Site::with('faculty')->get());
+        return response()->json(Site::with('faculty', 'departament')->get());
     }
 
     public function get_one(string $id) 
     {
-        return response()->json(Site::findOrFail($id)->load('faculty'));
+        return response()->json(Site::findOrFail($id)->load('faculty', 'departament'));
     }
     public function update(Request $request, $id) 
     {
@@ -32,6 +33,7 @@ class SitesController extends Controller
         $site->update([
             'link' => $request->link,
             'faculty_id' => $request->faculty_id,
+            'departament_id' => $request->departament_id,
         ]);
         return response($site);
     }

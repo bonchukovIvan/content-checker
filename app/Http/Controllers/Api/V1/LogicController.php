@@ -19,7 +19,6 @@ class LogicController extends Controller
         $sites = Site::with('faculty')->get();
         $groups = Group::with('values', 'faculty')->get();
 
-        // Initialize the cURL multi-handle
         $multiHandle = curl_multi_init();
 
         $handles = [];
@@ -28,22 +27,18 @@ class LogicController extends Controller
             
             $values = [];
 
-            // Create a new cURL handle for each site
             $handle = self::init_curl_handle($site->link);
 
-            // Add the handle to the multi-handle
             curl_multi_add_handle($multiHandle, $handle);
 
             $handles[] = ['site' => $site, 'handle' => $handle];
         }
 
-        // Execute all queries simultaneously, and continue processing until all are complete
         $running = null;
         do {
             curl_multi_exec($multiHandle, $running);
         } while ($running);
 
-        // Retrieve results from each handle
         foreach ($handles as $handleInfo) {
             $site = $handleInfo['site'];
             $handle = $handleInfo['handle'];
@@ -53,16 +48,21 @@ class LogicController extends Controller
             $pages_content = self::get_multiple_content($site_pages);
             $scss = 0;
             $buff = [];
-            $t = '';
             foreach ($groups as $group) {
                 $group_arr = [];
                 $res = [];
-
+                $group_dep_id = [];
+                foreach($group->departaments as $dep) {
+                    array_push($group_dep_id, $dep->id);
+                }
+                if (!in_array($site->departament_id, $group_dep_id)) {
+                    continue 1;
+                }
                 foreach ($group->values as $value) {
                     if ($group->faculty_id && $site->faculty_id) {
                         if ($group->faculty->name != $site->faculty->name) {
                             continue 2;
-                        }
+                        } 
                     }
                     $result = str_contains(mb_strtolower($content), mb_strtolower(trim($value->search_value)));
                     array_push($group_arr, ['name' => $group->name, 'value' => $value->search_value, 'result' => $result]);
@@ -76,7 +76,6 @@ class LogicController extends Controller
                         }
                     }
                 }
-                
                 $res['result'] = self::array_any($group_arr, true);
                 $res['name'] = $group->name;
 
@@ -89,16 +88,14 @@ class LogicController extends Controller
                     $scss++;
                 }
             }
-
+            
             $test['success'] = floor(($scss / $we) * 100);
             $test['values'] = $buff;
             array_push($finals, $test);
 
-            // Remove the handle from the multi-handle
             curl_multi_remove_handle($multiHandle, $handle);
         }
 
-        // Close the multi-handle
         curl_multi_close($multiHandle);
 
         return response($finals);

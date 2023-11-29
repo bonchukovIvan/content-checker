@@ -12,10 +12,16 @@ class Site extends Model
     protected $fillable = [
         'link',
         'faculty_id',
+        'departament_id',
     ];
     
     public function faculty()
     {
         return $this->belongsTo(Faculty::class);
+    }
+
+    public function departament()
+    {
+        return $this->belongsTo(Departament::class);
     }
 }

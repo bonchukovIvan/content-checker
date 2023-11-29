@@ -41,7 +41,8 @@ function display_sites(response) {
             const faculty_name = create('sites__faculty', elem.faculty.name);
             site.appendChild(faculty_name);
         }
-        
+        const departament_name = create('sites__faculty', elem.departament.name);
+            site.appendChild(departament_name);
         const sites = document.getElementById('sites');
         sites.appendChild(site);
     });

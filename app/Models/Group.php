@@ -29,4 +29,9 @@ class Group extends Model
     {
         return $this->hasMany(Value::class, 'values_group_id');
     }
+
+    public function departaments()
+    {
+        return $this->belongsToMany(Departament::class, 'departament_value_group');
+    }
 }

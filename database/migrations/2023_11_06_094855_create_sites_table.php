@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('link');
             $table->unsignedBigInteger('faculty_id')->nullable();
             $table->foreign('faculty_id')->references('id')->on('faculties')->onUpdate('cascade')->onDelete('set null');
+            $table->unsignedBigInteger('departament_id')->nullable();
+            $table->foreign('departament_id')->references('id')->on('departament')->onUpdate('cascade')->onDelete('set null');
             $table->timestamps();
         });
     }

@@ -4,9 +4,9 @@ use App\Http\Controllers\Api\V1\FacultiesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\SitesController;
-use App\Http\Controllers\Api\V1\LinksController;
 use App\Http\Controllers\Api\V1\ValuesGroupController;
 use App\Http\Controllers\Api\V1\LogicController;
+use App\Http\Controllers\Api\V1\DepartamentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +35,11 @@ Route::group(array('prefix' => '/v1'), function()
      */
     Route::get('faculties', [FacultiesController::class, 'get_all'])->name('faculties');
     Route::get('faculties/{id}', [FacultiesController::class, 'get_one']);
+    /*
+        Departament controller
+     */
+    Route::get('departaments', [DepartamentController::class, 'get_all'])->name('departaments');
+    Route::get('departaments/{id}', [DepartamentController::class, 'get_one']);
     /*
         ValuesGroup controller
      */
