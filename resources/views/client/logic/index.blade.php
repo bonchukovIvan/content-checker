@@ -34,6 +34,7 @@
                 const div = create('result');
                 const link = create('link', elem.link);
                 const success = create('group__success', elem.success+'%');
+                const index_count = create('index_count', 'К масштабу: '+elem.index_count);
                 const head = create('head');
                 const btn = create('collapsible', '+', '', 'button')
                 btn.addEventListener('click', () => 
@@ -57,6 +58,7 @@
                 });
                 head.appendChild(link);
                 head.appendChild(success);
+                div.appendChild(index_count);
                 div.appendChild(head);
                 div.appendChild(btn);
                 const values = create('result__values');
@@ -84,6 +86,7 @@
                 div.appendChild(values);
                 const results = document.getElementById('results'); 
                 results.appendChild(div);
+                
             }); 
             },
             complete: function(response){

@@ -1,28 +1,12 @@
 <?php
 
-$url = 'https://sumdu.edu.ua';
+$site = 'sumdu.edu.ua';
+$api_key = 'AIzaSyChf9E3gWI_Wkcvw-QsOncT4lYaKplNrgI';
+$cx = '4208b2f7e0c9b49e1';
 
-function crawl_all_links($url) {
-    $dom = new DOMDocument();
-    @$dom->loadHTMLFile($url);
+$query = 'https://www.googleapis.com/customsearch/v1?key='.$api_key.'&cx='.$cx.'&q=site:'.$site;
+$json_query = json_decode(file_get_contents($query));
+print_r(PHP_EOL. '-------------------'.PHP_EOL);
+print_r($json_query->queries->request[0]->totalResults);
 
-    $xpath = new DOMXPath($dom);
 
-    // Select all anchor elements on the page
-    $anchorElements = $xpath->query('//li//a');
-
-    $site_links = [];
-
-    foreach ($anchorElements as $anchorElement) {
-        if (str_starts_with($anchorElement->getAttribute('href'), '/')) {
-            array_push($site_links, $url . $anchorElement->getAttribute('href'));
-        } 
-        elseif (str_starts_with($anchorElement->getAttribute('href'), $url)) {
-            array_push($site_links, $anchorElement->getAttribute('href'));
-        }
-    }
-
-    return array_unique($site_links);
-}
-
-print_r(crawl_all_links($url));

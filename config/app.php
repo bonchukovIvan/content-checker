@@ -188,4 +188,6 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'search_api_key' => env('SEARCH_API_KEY'),
+    'search_cx' => env('SEARCH_CX'),
 ];

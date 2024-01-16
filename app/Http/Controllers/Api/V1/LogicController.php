@@ -44,6 +44,7 @@ class LogicController extends Controller
             $handle = $handleInfo['handle'];
             $site_pages = self::crawl_links($handleInfo['site']->link);
             $test['link'] = $handleInfo['site']->link;
+            $test['index_count'] = self::get_indexed_page($handleInfo['site']->link);
             $content = curl_multi_getcontent($handle);
             $pages_content = self::get_multiple_content($site_pages);
             $scss = 0;
@@ -62,7 +63,10 @@ class LogicController extends Controller
                     if ($group->faculty_id && $site->faculty_id) {
                         if ($group->faculty->name != $site->faculty->name) {
                             continue 2;
-                        } 
+                        }
+                    }
+                    if ($site->link === 'https://kvp.sumdu.edu.ua' && $group->faculty_id) {
+                        continue 2;
                     }
                     $result = str_contains(mb_strtolower($content), mb_strtolower(trim($value->search_value)));
                     array_push($group_arr, ['name' => $group->name, 'value' => $value->search_value, 'result' => $result]);
@@ -201,4 +205,20 @@ class LogicController extends Controller
         self::close_handle($mh, $handles);
         return self::get_contents_array($handles);
     } 
+
+    static public function get_indexed_page($site) {
+        if(str_starts_with($site, 'https://')) {
+            $site = str_replace('https://', '', $site);
+        }
+        elseif(str_starts_with($site, 'http://')) {
+            $site = str_replace('http://', '', $site);
+        }
+        
+        $api_key = \config('app.search_api_key');
+        $cx = \config('app.search_cx');
+        $query = 'https://www.googleapis.com/customsearch/v1?key='.$api_key.'&cx='.$cx.'&q=site:'.$site;
+    
+        $json_query = json_decode(file_get_contents($query));
+        return $json_query->queries->request[0]->totalResults;
+    }
 }
