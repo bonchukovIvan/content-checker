@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Group;
 use App\Models\Site;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class LogicController extends Controller
 {
@@ -44,7 +47,8 @@ class LogicController extends Controller
             $handle = $handleInfo['handle'];
             $site_pages = self::crawl_links($handleInfo['site']->link);
             $test['link'] = $handleInfo['site']->link;
-            $test['index_count'] = self::get_indexed_page($handleInfo['site']->link);
+            $test['faculty'] = $handleInfo['site']->faculty;
+
             $content = curl_multi_getcontent($handle);
             $pages_content = self::get_multiple_content($site_pages);
             $scss = 0;
@@ -68,16 +72,13 @@ class LogicController extends Controller
                     if ($site->link === 'https://kvp.sumdu.edu.ua' && $group->faculty_id) {
                         continue 2;
                     }
+                    
                     $result = str_contains(mb_strtolower($content), mb_strtolower(trim($value->search_value)));
+                    self::set_result($result, $group_arr, $group, $value);
                     array_push($group_arr, ['name' => $group->name, 'value' => $value->search_value, 'result' => $result]);
                     if(!$result) {
-                        foreach($pages_content as $page_content) {
-                            $result = str_contains(mb_strtolower($page_content), mb_strtolower(trim($value->search_value)));
-                            array_push($group_arr, ['name' => $group->name, 'value' => $value->search_value, 'result' => $result]);
-                            if($result) {
-                                break;
-                            }
-                        }
+                        $result = self::crawl_pages($pages_content, $value);
+                        self::set_result($result, $group_arr, $group, $value);
                     }
                 }
                 $res['result'] = self::array_any($group_arr, true);
@@ -101,9 +102,39 @@ class LogicController extends Controller
         }
 
         curl_multi_close($multiHandle);
+        
+        $groupedWebsites = collect($finals)->groupBy(function ($item) {
+            return $item['faculty'] ? $item['faculty']['name'] : 'Головні сайти підрозділів';
+        });
 
-        return response($finals);
+        $pdf = Pdf::loadView('pdf', compact('groupedWebsites'));
+        $pdf->setOption('encoding', 'UTF-8');
+        $pdf->setOption('font-family', 'DejaVu Sans');
+
+        return $pdf->download('t3.pdf');
+        
     }
+
+    static public function crawl_pages($pages_content, $value) {
+        foreach($pages_content as $page_content) {
+            $result = str_contains(mb_strtolower($page_content), mb_strtolower(trim($value->search_value)));
+            if($result) return $result;
+        }
+    }
+    static public function set_result($result, &$group_arr, $group, $value) {
+        
+        array_push($group_arr, ['name' => $group->name, 'value' => $value->search_value, 'result' => $result]);
+    }
+    // static public function crawl_rule($group, $site) {
+    //     if ($group->faculty_id && $site->faculty_id) {
+    //         if ($group->faculty->name != $site->faculty->name) {
+    //             continue 2;
+    //         }
+    //     }
+    //     if ($site->link === 'https://kvp.sumdu.edu.ua' && $group->faculty_id) {
+    //         continue 2;
+    //     }
+    // }
 
     static private function init_curl_handle($url)
     {
@@ -216,9 +247,14 @@ class LogicController extends Controller
         
         $api_key = \config('app.search_api_key');
         $cx = \config('app.search_cx');
-        $query = 'https://www.googleapis.com/customsearch/v1?key='.$api_key.'&cx='.$cx.'&q=site:'.$site;
-    
-        $json_query = json_decode(file_get_contents($query));
-        return $json_query->queries->request[0]->totalResults;
+        $query = "https://www.googleapis.com/customsearch/v1?key={$api_key}&cx={$cx}&q=site:{$site}";
+        $count = 0;
+        for ($i = 0; $i < 4; $i++) {
+            $json_query = json_decode(file_get_contents($query));
+            $count += $json_query->queries->request[0]->totalResults;
+        }
+        // $json_query = json_decode(file_get_contents($query));
+        // return $json_query->queries->request[0]->totalResults;
+        return $count/5;
     }
 }
