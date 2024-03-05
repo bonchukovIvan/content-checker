@@ -125,17 +125,6 @@ class LogicController extends Controller
         
         array_push($group_arr, ['name' => $group->name, 'value' => $value->search_value, 'result' => $result]);
     }
-    // static public function crawl_rule($group, $site) {
-    //     if ($group->faculty_id && $site->faculty_id) {
-    //         if ($group->faculty->name != $site->faculty->name) {
-    //             continue 2;
-    //         }
-    //     }
-    //     if ($site->link === 'https://kvp.sumdu.edu.ua' && $group->faculty_id) {
-    //         continue 2;
-    //     }
-    // }
-
     static private function init_curl_handle($url)
     {
         $ch = curl_init();

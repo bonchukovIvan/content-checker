@@ -27,8 +27,10 @@
 <body>
     <h1>Моніторинг. Звіт за xx-xx-xxxx</h1>
     @foreach($groupedWebsites as $facultyName => $websites)
+    <a name="{{ str_slug($facultyName) }}"></a>
         <h2>Факультет: {{ $facultyName }}</h2>
         @foreach($websites as $website)
+        
             <h3>Сайт: {{ $website['link'] }}</h3>
             <table>
                 <tr>
@@ -41,8 +43,16 @@
                     </tr>
                 @endforeach
             </table>
-            <div style='page-break-after: always'></div>
+            <br>
+            <hr>
+            <br>
         @endforeach
+        <br>
+        <hr>
+        <br>
+        <br>
+        <hr>
+        <br>
     @endforeach
 </body>
 </html>
